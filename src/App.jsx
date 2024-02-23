@@ -9,8 +9,8 @@ import { data } from "autoprefixer";
 // const clientSecret = process.env.CLIENT_SECRET;
 // const redirectUri = process.env.REDIRECT_URI;
 // const scope = process.env.SCOPE;
-const clientId = "121762";
-const clientSecret = "9cc85ab3c82a68efe379aa7c996ecb4ff3c3c190";
+const clientId = "121975";
+const clientSecret = "3eb88fded0c20596ef609f8d7862faa253494615";
 const redirectUri = "http://localhost:5173";
 const scope = "read_all";
 
