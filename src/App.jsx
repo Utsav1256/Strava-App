@@ -9,20 +9,20 @@ import { data } from "autoprefixer";
 // const clientSecret = process.env.CLIENT_SECRET;
 // const redirectUri = process.env.REDIRECT_URI;
 // const scope = process.env.SCOPE;
-const clientId = "121975";
-const clientSecret = "3eb88fded0c20596ef609f8d7862faa253494615";
+const clientId = "121762";
+const clientSecret = "9cc85ab3c82a68efe379aa7c996ecb4ff3c3c190";
 const redirectUri = "http://localhost:5173";
 const scope = "read_all";
 
 const App = () => {
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState();
   const [authHandled, setAuthHandled] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [atheleteStats, setAtheleteStats] = useState(null);
+  const [athleteStats, setAthleteStats] = useState(null);
 
   const fetchAthleteStats = async (id, token) => {
     try {
-      const Response = await axios.get(
+      const AtheleteRes = await axios.get(
         `https://www.strava.com/api/v3/athletes/${id}/stats`,
         {
           headers: {
@@ -31,8 +31,8 @@ const App = () => {
         }
       );
 
-      console.log("Athlete Stats:", Response.data);
-      setAtheleteStats(Response.data);
+      console.log("Athlete Stats:", AtheleteRes.data);
+      setAthleteStats(AtheleteRes.data);
     } catch (error) {
       console.error("Error fetching athlete stats:", error);
     }
@@ -48,7 +48,7 @@ const App = () => {
         }
       );
 
-      console.log("Athlete Data:", Response.data);
+      console.log("User Data:", Response.data);
       setUserData(Response.data);
       console.log(Response.data.id);
       fetchAthleteStats(Response.data.id, token);
@@ -90,6 +90,7 @@ const App = () => {
 
       console.log("Token Exchange Response:", tokenResponse.data);
       setAccessToken(tokenResponse.data.access_token);
+      // localStorage.setItem("accessToken", tokenResponse.data.access_token);
 
       // Fetch athlete data after obtaining the access token
       fetchAthleteData(tokenResponse.data.access_token);
@@ -120,6 +121,13 @@ const App = () => {
   };
 
   useEffect(() => {
+    // const storedAccessToken = localStorage.getItem("accessToken");
+    // if (storedAccessToken) {
+    //   setAccessToken(storedAccessToken);
+    //   fetchAthleteData(storedAccessToken);
+    // } else {
+    //   handleAuthenticationCallback();
+    // }
     handleAuthenticationCallback();
   }, []);
 
@@ -132,9 +140,9 @@ const App = () => {
     <div>
       {accessToken ? (
         <>
-          {userData ? (
+          {userData && athleteStats ? (
             <>
-              <UserData userData={userData} atheleteStats={atheleteStats} />
+              <UserData userData={userData} athleteStats={athleteStats} />
             </>
           ) : (
             <>
