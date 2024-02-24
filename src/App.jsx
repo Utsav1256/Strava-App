@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UserData from "./UserData";
-import { data } from "autoprefixer";
 // import dotenv from "dotenv";
 // dotenv.config();
 
@@ -15,7 +14,9 @@ const redirectUri = "http://localhost:5173";
 const scope = "read_all";
 
 const App = () => {
-  const [accessToken, setAccessToken] = useState();
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken") || ""
+  );
   const [authHandled, setAuthHandled] = useState(false);
   const [userData, setUserData] = useState(null);
   const [athleteStats, setAthleteStats] = useState(null);
@@ -57,26 +58,6 @@ const App = () => {
     }
   };
 
-  const refreshAccessToken = async (refreshToken) => {
-    try {
-      const tokenResponse = await axios.post(
-        "https://www.strava.com/oauth/token",
-        {
-          client_id: clientId,
-          client_secret: clientSecret,
-          refresh_token: refreshToken,
-          grant_type: "refresh_token",
-        }
-      );
-
-      console.log("Refresh Token Response:", tokenResponse.data);
-      setAccessToken(tokenResponse.data.access_token);
-      fetchAthleteData(tokenResponse.data.access_token);
-    } catch (error) {
-      console.error("Refresh Token Error:", error);
-    }
-  };
-
   const exchangeAuthorizationForToken = async (authorizationCode) => {
     try {
       const tokenResponse = await axios.post(
@@ -90,7 +71,7 @@ const App = () => {
 
       console.log("Token Exchange Response:", tokenResponse.data);
       setAccessToken(tokenResponse.data.access_token);
-      // localStorage.setItem("accessToken", tokenResponse.data.access_token);
+      localStorage.setItem("accessToken", tokenResponse.data.access_token);
 
       // Fetch athlete data after obtaining the access token
       fetchAthleteData(tokenResponse.data.access_token);
@@ -121,14 +102,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    // const storedAccessToken = localStorage.getItem("accessToken");
-    // if (storedAccessToken) {
-    //   setAccessToken(storedAccessToken);
-    //   fetchAthleteData(storedAccessToken);
-    // } else {
-    //   handleAuthenticationCallback();
-    // }
-    handleAuthenticationCallback();
+    const storedAccessToken = localStorage.getItem("accessToken");
+    if (storedAccessToken) {
+      setAccessToken(storedAccessToken);
+      fetchAthleteData(storedAccessToken);
+    } else {
+      handleAuthenticationCallback();
+    }
   }, []);
 
   const handleConnect = () => {

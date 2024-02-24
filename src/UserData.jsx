@@ -1,7 +1,6 @@
 const UserData = (props) => {
-  {
-    console.log(props);
-  }
+  console.log(props);
+
   const { userData, athleteStats } = props;
   const {
     firstname,
@@ -18,9 +17,9 @@ const UserData = (props) => {
   console.log("athleteStats", athleteStats);
 
   return (
-    <div className="w-full flex flex-col gap-5">
+    <div className="w-full flex flex-col gap-5 items-center justify-center">
       {/* Athelete Details */}
-      <div className="bg-gray-100 w-4/5 h-3/5 rounded p-5 ">
+      <div className="bg-gray-100 w-4/5 h-3/5 rounded p-5 mt-5">
         <div
           className="uppercase trackin
         
@@ -45,54 +44,106 @@ const UserData = (props) => {
         </div>
       </div>
       {/* Athelete Stats */}
-      <div>
-        <div className="bg-gray-100 w-4/5 h-3/5 rounded-lg p-5">
-          <div className="uppercase tracking-wide text-sm text-orange-500 font-semibold ml-4">
-            Athelete Stats
-          </div>
-          {athleteStats ? (
-            <>
-              <div>
-                <h3 className="text-md font-semibold mb-2">All Ride Totals</h3>
-                <ul className="list-disc pl-6">
-                  {Object.entries(athleteStats?.all_ride_totals).map(
-                    ([key, value]) => (
-                      <li key={key}>
-                        {key}: {value}
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-md font-semibold mb-2">All Run Totals</h3>
-                <ul className="list-disc pl-6">
-                  {Object.entries(athleteStats?.all_run_totals).map(
-                    ([key, value]) => (
-                      <li key={key}>
-                        {key}: {value}
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-md font-semibold mb-2">All Swim Totals</h3>
-                <ul className="list-disc pl-6">
-                  {Object.entries(athleteStats?.all_swim_totals).map(
-                    ([key, value]) => (
-                      <li key={key}>
-                        {key}: {value}
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>{" "}
-            </>
-          ) : (
-            <>Loading...</>
-          )}
+      <div className="bg-gray-100 w-4/5 h-3/5 rounded-lg p-6">
+        <div className="uppercase tracking-wide text-sm text-orange-500 font-semibold ml-4 mb-4">
+          Athelete Stats
         </div>
+        {athleteStats ? (
+          <>
+            <div className="flex  justify-evenly">
+              <div className="ml-6 flex flex-col gap-10">
+                <div>
+                  <h3 className="text-md font-semibold mb-2">
+                    All Ride Totals
+                  </h3>
+                  <ul className="list-disc pl-6">
+                    {Object.entries(athleteStats?.all_ride_totals).map(
+                      ([key, value]) => (
+                        <li key={key}>
+                          {key}: {value}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-md font-semibold mb-2">All Run Totals</h3>
+                  <ul className="list-disc pl-6">
+                    {Object.entries(athleteStats?.all_run_totals).map(
+                      ([key, value]) => (
+                        <li key={key}>
+                          {key}: {value}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-md font-semibold mb-2">
+                    All Swim Totals
+                  </h3>
+                  <ul className="list-disc pl-6">
+                    {Object.entries(athleteStats?.all_swim_totals).map(
+                      ([key, value]) => (
+                        <li key={key}>
+                          {key}: {value}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>{" "}
+              </div>
+              <div className="">
+                <div className="ml-6 flex flex-col gap-4">
+                  <div>
+                    <h3 className="text-md font-semibold mb-2">
+                      Recent Ride Totals
+                    </h3>
+                    <ul className="list-disc pl-6">
+                      {Object.entries(athleteStats?.recent_ride_totals).map(
+                        ([key, value]) => (
+                          <li key={key}>
+                            {key}: {value}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-md font-semibold mb-2">
+                      Recent Run Totals
+                    </h3>
+                    <ul className="list-disc pl-6">
+                      {Object.entries(athleteStats?.recent_run_totals).map(
+                        ([key, value]) => (
+                          <li key={key}>
+                            {key}: {value}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-md font-semibold mb-2">
+                      Recent Swim Totals
+                    </h3>
+                    <ul className="list-disc pl-6">
+                      {Object.entries(athleteStats?.recent_swim_totals).map(
+                        ([key, value]) => (
+                          <li key={key}>
+                            {key}: {value}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>{" "}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>Loading...</>
+        )}
       </div>
     </div>
   );
