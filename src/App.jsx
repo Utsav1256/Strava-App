@@ -126,7 +126,11 @@ const App = () => {
             </>
           ) : (
             <>
-              <p>Loading user data...</p>
+              <div className="bg-slate-600 w-full h-screen flex flex-col items-center justify-center">
+                <h2 className="text-white text-center text-xl">
+                  Loading user data...
+                </h2>
+              </div>
             </>
           )}
         </>
