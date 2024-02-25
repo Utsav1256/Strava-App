@@ -10,7 +10,7 @@ import UserData from "./UserData";
 // const scope = process.env.SCOPE;
 const clientId = "121762";
 const clientSecret = "9cc85ab3c82a68efe379aa7c996ecb4ff3c3c190";
-const redirectUri = "https://strava-app-rho.vercel.app/";
+const redirectUri = "http://localhost:5173";
 const scope = "read_all";
 
 const App = () => {

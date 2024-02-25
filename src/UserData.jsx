@@ -12,6 +12,9 @@ const UserData = (props) => {
     username,
     profile,
     resource_state,
+    weight,
+    country,
+    state,
   } = userData;
 
   console.log("athleteStats", athleteStats);
@@ -37,9 +40,19 @@ const UserData = (props) => {
             <h2 className="text-xl font-semibold">
               {firstname} {lastname}
             </h2>
+            <p className="mt-2 text-gray-600">
+              Username: {username ? username : "Not available"}
+            </p>
             <p className="mt-2 text-gray-600">Sex: {sex}</p>
-            <p className="mt-2 text-gray-600">Stat: 30</p>
-            <p className="mt-2 text-gray-600">City: {city}</p>
+
+            <p className="mt-2 text-gray-600">
+              Weight: {weight ? weight : "Not Available"}
+            </p>
+            <p className="mt-2 text-gray-600">
+              Location: {city}
+              {", "} {state}
+              {", "} {country}{" "}
+            </p>
           </div>
         </div>
       </div>
